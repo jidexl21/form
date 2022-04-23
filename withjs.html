@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form Submission Exercise NO JS</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    </head>
+    <body>
+
+        <form id="form1" method="post" action="https://reqbin.com/sample/post/json">
+            <label>
+                Name
+            </label>
+            <input type="text" name="username">
+            
+            <label>
+                Password
+            </label>
+            <input type="password" name="password">
+            <button type="submit">
+                Submit
+            </button>
+        </form>
+        <div id="output" class="border">
+
+        </div>
+
+    </body>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        var form = $("#form1");
+        form.on("submit", function(evt){
+            evt.preventDefault();
+            var status = 'FETCHING DATA';
+            console.log(status); 
+
+            $("#output").text(status)
+             $.ajax({
+                url: 'https://randomuser.me/api/',
+                dataType: 'json',
+                success: function(data) {
+                    var response = JSON.stringify(data)
+                    $("#output").text(data.results[0].name.first);
+                }
+            });
+        })
+        
+        
+    </script>
+
+</html>
